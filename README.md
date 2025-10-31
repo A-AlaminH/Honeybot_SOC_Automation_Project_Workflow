@@ -1,3 +1,6 @@
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)]([https://linkedin.com/in/your-profile])
+[![Email](https://img.shields.io/badge/Email-Contact%20Me-green?logo=gmail&logoColor=white)](mailto:a.alaminhussain@proton.me)
+[![Version](https://img.shields.io/badge/Version-1.0.0-brightyellow)](README.md)
 # Honeybot SOC Automation Project (Wazuh SIEM + n8n + AbuseIPDB)
 
 ## Project Overview
