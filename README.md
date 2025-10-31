@@ -6,17 +6,16 @@
 
 This personal cybersecurity project demonstrates a fully automated security response workflow by integrating Wazuh (security information and event management) with n8n (workflow automation) to detect, investigate, and respond to threats in real-time. The system identifies suspicious authentication attempts and RDP logins by correlating Wazuh alerts with threat intelligence data, automatically enriches them with AbuseIPDB reputation information, and triggers immediate containment actions including network isolation and multi-channel alerting.
 
-### ⚠️ Production Disclaimer
 
-This project is designed as a **proof-of-concept for educational and personal lab environments** and should not be deployed directly to production systems without extensive security hardening and testing. While the architecture demonstrates industry-standard SOC automation principles, production deployments require:
+```markdown
 
-- Proper API secret management and credential rotation
-- Network segmentation and firewall controls
-- Incident response procedures and approval workflows
-- Comprehensive logging and audit trails
-- Security compliance assessments
+⚠️ Disclaimer
 
-If hosting on a home network with external access, be aware that exposing RDP endpoints or Wazuh APIs carries significant security risks. Use VPN/bastion hosts and implement strict access controls.
+> This project is a proof-of-concept for educational use.  
+> Not intended for production deployment.  
+> Use responsibly and at your own risk.
+```
+
 
 ---
 
@@ -320,6 +319,9 @@ On Windows Server 2022:
 
 ## Screenshots 
 <img width="1440" height="660" alt="piechart" src="https://github.com/user-attachments/assets/0f4be106-39b1-4213-a861-78e5e278cf47" />
+<img width="671" height="680" alt="telegram alert" src="https://github.com/user-attachments/assets/fc9d4111-a86f-4ab7-9062-82d9a6a97440" />
+<img width="673" height="664" alt="telegram report" src="https://github.com/user-attachments/assets/820d9e87-8e6d-4dde-acab-0dd5c9cae89e" />
+<img width="1440" height="660" alt="piechart" src="https://github.com/user-attachments/assets/8b7bba8e-a158-4955-8f13-485bb6ba1502" />
 
 
 ---
