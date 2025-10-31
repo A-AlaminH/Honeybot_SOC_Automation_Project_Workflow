@@ -1,8 +1,8 @@
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)]([https://linkedin.com/in/your-profile])
 [![Email](https://img.shields.io/badge/Email-Contact%20Me-green?logo=gmail&logoColor=white)](mailto:a.alaminhussain@proton.me)
 [![Version](https://img.shields.io/badge/Version-1.0.0-brightyellow)](README.md)
-# Honeybot SOC Automation Home Lab Project
-# (Wazuh SIEM + n8n + AbuseIPDB)
+# Honeybot SOC Automation Home Lab Project (Wazuh SIEM + n8n + AbuseIPDB)
+
 
 <img width="1414" height="740" alt="Workflow Automation screenshot" src="https://github.com/user-attachments/assets/5f38c5bb-9118-4829-8eb0-3ab4358c5306" />
 
