@@ -1,5 +1,4 @@
 # Honeybot SOC Automation Project (Wazuh SIEM + n8n + AbuseIPDB)
----
 
 ## Project Overview
 ---
