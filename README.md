@@ -1,6 +1,9 @@
-# Wazuh + n8n Security Automation Project
+# Honeybot SOC Automation Project (Wazuh SIEM + n8n + AbuseIPDB)
+---
 
 ## Project Overview
+---
+<img width="1414" height="740" alt="Workflow Automation screenshot" src="https://github.com/user-attachments/assets/5f38c5bb-9118-4829-8eb0-3ab4358c5306" />
 
 This personal cybersecurity project demonstrates a fully automated security response workflow by integrating Wazuh (security information and event management) with n8n (workflow automation) to detect, investigate, and respond to threats in real-time. The system identifies suspicious authentication attempts and RDP logins by correlating Wazuh alerts with threat intelligence data, automatically enriches them with AbuseIPDB reputation information, and triggers immediate containment actions including network isolation and multi-channel alerting.
 
@@ -316,17 +319,9 @@ On Windows Server 2022:
 
 ---
 
-## Screenshots & Demonstration
+## Screenshots 
+<img width="1440" height="660" alt="piechart" src="https://github.com/user-attachments/assets/0f4be106-39b1-4213-a861-78e5e278cf47" />
 
-[Screenshot: n8n workflow overview with all nodes visible]
-
-[Screenshot: Wazuh dashboard showing detected Rule 60204 alert]
-
-[Screenshot: Threat Data Google Sheet with populated attack records]
-
-[Screenshot: Telegram bot notification showing isolation confirmation]
-
-[Demo GIF: End-to-end workflow from Wazuh alert to isolation completion]
 
 ---
 
