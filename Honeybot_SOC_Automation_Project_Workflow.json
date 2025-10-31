@@ -1,0 +1,1544 @@
+{
+  "name": "Honeybot_SOC_Automation_Project_Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9e0f5bf1-896e-4a02-9ab0-3149fed83e7c",
+              "name": "attackerIP",
+              "value": "={{ $json.body.all_fields.data.win.eventdata.ipAddress }}",
+              "type": "string"
+            },
+            {
+              "id": "6bd7133d-bee5-47c0-9055-ac9bb17338b3",
+              "name": "ruleName",
+              "value": "={{ $json.body.all_fields.rule.description }}",
+              "type": "string"
+            },
+            {
+              "id": "78746831-bdfe-46ac-9884-a2c52585fa89",
+              "name": "RuleID",
+              "value": "={{ $json.body.all_fields.rule.id }}",
+              "type": "string"
+            },
+            {
+              "id": "af7ce279-1471-4f3c-9a24-9bd30f6671c6",
+              "name": "agentName",
+              "value": "={{ $json.body.all_fields.agent.name }}",
+              "type": "string"
+            },
+            {
+              "id": "e30f045e-b842-45ac-9738-ebe4fd3b3fca",
+              "name": "agentIP",
+              "value": "={{ $json.body.all_fields.agent.ip }}",
+              "type": "string"
+            },
+            {
+              "id": "01afe0a4-a416-4484-a0ff-b60475697aa6",
+              "name": "timestamp",
+              "value": "={{ $json.body.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "ed7c6e87-496e-4ff0-8ad1-f9d53f78b521",
+              "name": "severity",
+              "value": "={{ $json.body.all_fields.rule.level }}",
+              "type": "string"
+            },
+            {
+              "id": "fbd9229e-3c49-4382-aae5-65d042661c88",
+              "name": "logonType",
+              "value": "={{ $json.body.all_fields.data.win.eventdata.logonType }}",
+              "type": "string"
+            },
+            {
+              "id": "fd9a1886-93a5-4d4e-82f3-792bc6c415f9",
+              "name": "targetUsername",
+              "value": "={{ $json.body.all_fields.data.win.eventdata.targetUserName }}",
+              "type": "string"
+            },
+            {
+              "id": "91fa82ed-6bb3-42e0-add4-2a68d25f6f44",
+              "name": "workstationName",
+              "value": "={{ $json.body.all_fields.data.win.eventdata.workstationName }}",
+              "type": "string"
+            },
+            {
+              "id": "2ac7d8b2-a9d3-442e-8f5d-4083d6c8f453",
+              "name": "agentID",
+              "value": "={{ $json.body.all_fields.agent.id }}",
+              "type": "string"
+            },
+            {
+              "id": "bf0fb3b2-747b-447b-b66b-ac15cda978b3",
+              "name": "logonType",
+              "value": "={{ $json.body.all_fields.data.win.eventdata.logonType }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1568,
+        288
+      ],
+      "id": "6e3ac792-b3bb-4136-96f0-ac4b3b414608",
+      "name": "Extract Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Extract Fields').item.json.RuleID }}",
+                    "rightValue": "60204",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "75938717-f523-46d4-827c-0cbfec200884"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Detection"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "fa1a939f-3cd1-4bc4-bb00-091671a6052c",
+                    "leftValue": "={{ $('Extract Fields').item.json.RuleID }}",
+                    "rightValue": "92653",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Response"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        -1120,
+        288
+      ],
+      "id": "8963c140-8ea3-41ea-93ab-fd5aa2f81c8f",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE",
+          "mode": "list",
+          "cachedResultName": "Threat Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "attackerIP",
+              "lookupValue": "={{ $('Extract Fields').item.json.attackerIP }}"
+            }
+          ]
+        },
+        "options": {
+          "returnFirstMatch": false
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -896,
+        96
+      ],
+      "id": "e9bf2204-a1c6-4b25-9bc5-f43dc21e83c3",
+      "name": "Sheet Lookup",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleApi": {
+          "id": "B4uGw8jaHLInkh3L",
+          "name": "Google Sheets service account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE",
+          "mode": "list",
+          "cachedResultName": "Threat Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "attackerIP": "={{ $json.attackerIP }}",
+            "isp": "={{ $json.data.isp }}",
+            "totalAttempts": "={{ $json.workstationNames }}",
+            "firstSeen": "={{ $json.firstSeen }}",
+            "lastSeen": "={{ $json.lastSeen }}",
+            "isTor": "={{ $json.isTor }}",
+            "abuseScore": "={{ $json.abuseScore }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "attackerIP",
+              "displayName": "attackerIP",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "targetUsernames",
+              "displayName": "targetUsernames",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "totalAttempts",
+              "displayName": "totalAttempts",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "countryCode",
+              "displayName": "countryCode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "workstationNames",
+              "displayName": "workstationNames",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "usageType",
+              "displayName": "usageType",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "isp",
+              "displayName": "isp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "abuseScore",
+              "displayName": "abuseScore",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "totalReports",
+              "displayName": "totalReports",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "isTor",
+              "displayName": "isTor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "lastReportedAt",
+              "displayName": "lastReportedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "firstSeen",
+              "displayName": "firstSeen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "lastSeen",
+              "displayName": "lastSeen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "isNew",
+              "displayName": "isNew",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        0,
+        192
+      ],
+      "id": "cabdfa3d-f571-4418-a62b-af1410c95d5f",
+      "name": "Append Row",
+      "credentials": {
+        "googleApi": {
+          "id": "B4uGw8jaHLInkh3L",
+          "name": "Google Sheets service account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE/edit?gid=0#gid=0",
+          "mode": "url"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "row_number": 0,
+            "attackerIP": "={{ $('Extract Fields').item.json.attackerIP }}",
+            "workstationNames": "={{ $('Extract Fields').item.json.workstationName }}"
+          },
+          "matchingColumns": [
+            "attackerIP"
+          ],
+          "schema": [
+            {
+              "id": "attackerIP",
+              "displayName": "attackerIP",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "countryCode",
+              "displayName": "countryCode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "targetUsernames",
+              "displayName": "targetUsernames",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "totalAttempts",
+              "displayName": "totalAttempts",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "workstationNames",
+              "displayName": "workstationNames",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "usageType",
+              "displayName": "usageType",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "isp",
+              "displayName": "isp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "abuseScore",
+              "displayName": "abuseScore",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "totalReports",
+              "displayName": "totalReports",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "isTor",
+              "displayName": "isTor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "lastReportedAt",
+              "displayName": "lastReportedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "firstSeen",
+              "displayName": "firstSeen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "lastSeen",
+              "displayName": "lastSeen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2916049c-6e86-4ca2-ac8e-1344a045b6e6",
+      "name": "Update Row",
+      "credentials": {
+        "googleApi": {
+          "id": "B4uGw8jaHLInkh3L",
+          "name": "Google Sheets service account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://_YOUR_IP_:55000/security/user/authenticate?raw=true",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1568,
+        528
+      ],
+      "id": "70dd5404-b7a8-4861-bc8a-508226097280",
+      "name": "Get Wazuh Token1",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "bollOwPkDqtobGEm",
+          "name": "Wazuh credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nconst lookupData = $('Sheet Lookup').first().json;\nconst freshAlert = $('Extract Fields').first().json;\n\n// Merge usernames (avoid duplicates)\nconst existingUsernames = lookupData.targetUsernames || \"\";\nconst newUsername = freshAlert.targetUsername || \"\";\nlet usernameArray = existingUsernames ? existingUsernames.split(\", \") : [];\nif (newUsername && usernameArray.indexOf(newUsername) === -1) {\n  usernameArray.push(newUsername);\n}\n\n// Merge workstations (avoid duplicates)  \nconst existingWorkstations = lookupData.workstationNames || \"\";\nconst newWorkstation = freshAlert.workstationName || \"\";\nlet workstationArray = existingWorkstations ? existingWorkstations.split(\", \") : [];\nif (newWorkstation && workstationArray.indexOf(newWorkstation) === -1) {\n  workstationArray.push(newWorkstation);\n}\n\nreturn {\n  ...data,\n  targetUsernames: usernameArray.join(\", \"),\n  workstationNames: workstationArray.join(\", \")\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -448,
+        96
+      ],
+      "id": "7ff0e60a-dabc-43e8-82a8-d1c80223f65a",
+      "name": "Merge Existing Data"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 3
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1808,
+        928
+      ],
+      "id": "de263084-1a55-4822-bc68-21742fb83336",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1808,
+        704
+      ],
+      "id": "c3b51383-658c-4677-9076-f761930f8fc6",
+      "name": "Manually De-Isolate"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1792,
+        528
+      ],
+      "id": "b0041436-625b-41c0-bcf0-fc04ce56f49c",
+      "name": "Bot De-Isolate Trigger",
+      "webhookId": "8dad53f0-348e-44d9-832d-87dcb232a99a",
+      "credentials": {
+        "telegramApi": {
+          "id": "3psP5oEc01meZIOO",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": false,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "994d1133-3e36-43a2-9f1d-e95aa5600439",
+              "leftValue": "={{ $json.isNew}}",
+              "rightValue": 0,
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {
+          "ignoreCase": true
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -224,
+        96
+      ],
+      "id": "ac2498c2-c52b-449a-ae9a-d3377bcc461c",
+      "name": "New?"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE",
+          "mode": "list",
+          "cachedResultName": "Threat Data",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DGp5gIxTcMY_ph6cBaB7awq1ibX9hMZogz4HoA2-9iE/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -1584,
+        928
+      ],
+      "id": "9da8c674-c575-4188-97ae-5206316d6b34",
+      "name": "Get Attacks",
+      "credentials": {
+        "googleApi": {
+          "id": "B4uGw8jaHLInkh3L",
+          "name": "Google Sheets service account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const rows = $input.all();\n\nif (rows.length === 0) {\n  return [{\n    json: {\n      totalIPs: 0,\n      totalAttempts: 0,\n      totalAlerts: 0,\n      message: \"✅ No suspicious activity detected in the last period.\"\n    }\n  }];\n}\n\n// Calculate totals\nconst totalIPs = rows.length;\nconst totalAttempts = rows.reduce((sum, row) => sum + (row.json.totalAttempts || 0), 0);\nconst totalAlerts = rows.reduce((sum, row) => sum + (row.json.alertCount || 0), 0);\n\n// Find top attackers (by attempts)\nconst topAttackers = rows\n  .sort((a, b) => (b.json.totalAttempts || 0) - (a.json.totalAttempts || 0))\n  .slice(0, 5)\n  .map(row => ({\n    ip: row.json.attackerIP,\n    attempts: row.json.totalAttempts,\n    country: row.json.countryCode,\n    isp: row.json.isp,\n    abuseScore: row.json.abuseScore\n  }));\n\n// Count by country\nconst countryCounts = {};\nrows.forEach(row => {\n  const country = row.json.countryCode || \"Unknown\";\n  countryCounts[country] = (countryCounts[country] || 0) + 1;\n});\n\nconst topCountries = Object.entries(countryCounts)\n  .sort((a, b) => b[1] - a[1])\n  .slice(0, 3);\n\n// High-risk IPs (abuse score > 50 or TOR)\nconst highRiskIPs = rows.filter(row => \n  row.json.abuseScore > 50 || row.json.isTor === true\n).length;\n\nreturn [{\n  json: {\n    totalIPs,\n    totalAttempts,\n    totalAlerts,\n    topAttackers,\n    topCountries,\n    highRiskIPs,\n    reportTime: new Date().toISOString()\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1360,
+        928
+      ],
+      "id": "bf6a3219-e7eb-42ac-87c5-7405e136ed90",
+      "name": "Report Format Code"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "https://_YOUR_IP_:55000/active-response?agents_list=001",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.data }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"command\": \"!isolation.exe\",\n  \"arguments\": [\"_YOUR_IP_\"],\n  \"alert\": { \n    \"data\": { \n      \"action\": \"release\",\n      \"user\": \"n8n-wazuh\",\n      \"debug\": false\n    }\n  }\n}",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1344,
+        528
+      ],
+      "id": "dee6d8c9-b956-444c-8a44-d3adee5f4996",
+      "name": "De-Isolate Host"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "af549653-2b45-47ea-aafd-a14e9643d07b",
+              "name": "isNew",
+              "value": "={{ Object.keys($json).length === 0 || !$json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "8395b675-68bd-4733-9cf6-5075ac1268f3",
+              "name": "attackerIP",
+              "value": "={{ $('Extract Fields').first().json.attackerIP }}",
+              "type": "string"
+            },
+            {
+              "id": "7e67006d-df1c-49a2-911b-7976d9a87f1b",
+              "name": "countryCode",
+              "value": "={{ $('AbuseIPDB Lookup').item.json.data.countryCode }}",
+              "type": "string"
+            },
+            {
+              "id": "a66b8349-14eb-40a0-8b68-6e0d0ec98a89",
+              "name": "isp",
+              "value": "={{ $('AbuseIPDB Lookup').item.json.data.isp }}",
+              "type": "string"
+            },
+            {
+              "id": "b4fdb07b-e4c4-4a24-83f0-856fb7dd1c37",
+              "name": "usageType",
+              "value": "={{ $('AbuseIPDB Lookup').item.json.data.usageType }}",
+              "type": "string"
+            },
+            {
+              "id": "3051990e-81af-42b9-84d9-e62f983ff40a",
+              "name": "abuseScore",
+              "value": "={{ $('AbuseIPDB Lookup').item.json.data.abuseConfidenceScore }}",
+              "type": "number"
+            },
+            {
+              "id": "2d0fb98e-5393-4ea3-9a64-3e27ad721b97",
+              "name": "totalReports",
+              "value": "={{ $('AbuseIPDB Lookup').item.json.data.totalReports }}",
+              "type": "number"
+            },
+            {
+              "id": "950d61e1-daa6-487b-9853-83125c294dab",
+              "name": "isTor",
+              "value": "={{ $('AbuseIPDB Lookup').item.json.data.isTor }}",
+              "type": "string"
+            },
+            {
+              "id": "79a6166e-8137-4658-b8ff-f7fdd00d92cb",
+              "name": "lastReportedAt",
+              "value": "={{ $('AbuseIPDB Lookup').item.json.data.lastReportedAt }}",
+              "type": "string"
+            },
+            {
+              "id": "b174af52-42af-463f-b9c5-d1b6af660c12",
+              "name": "targetUsernames",
+              "value": "={{ $json.targetUsernames ? $json.targetUsernames + (', ' + $('Extract Fields').first().json.targetUsername) : $('Extract Fields').first().json.targetUsername }}",
+              "type": "string"
+            },
+            {
+              "id": "d62b1c40-90f1-4bc3-99ea-a332ead698cb",
+              "name": "workstationNames",
+              "value": "={{ $json.workstationNames ? $json.workstationNames + (', ' + $('Extract Fields').first().json.workstationName) : $('Extract Fields').first().json.workstationName }}",
+              "type": "string"
+            },
+            {
+              "id": "350d1b22-21e1-4344-8274-60e253a8b24e",
+              "name": "firstSeen",
+              "value": "={{ $json.firstSeen || $('Extract Fields').first().json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "8e2f1ecf-48a4-419f-8ef1-cce07020c8bf",
+              "name": "lastSeen",
+              "value": "={{ $('Extract Fields').first().json.timestamp }}",
+              "type": "string"
+            },
+            {
+              "id": "e6026d36-80d5-4ff4-bb75-f6f8c9b9a1e1",
+              "name": "totalAttempts",
+              "value": "={{ $json.totalAttempts ? $json.totalAttempts + 8 : 8 }}\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -672,
+        96
+      ],
+      "id": "e3efa103-f778-4ff9-8bc4-88ed5c747d65",
+      "name": "Set Fields"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "wazuh-alerts",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1792,
+        288
+      ],
+      "id": "04964640-59e8-4277-9d6c-49644431ce29",
+      "name": "Wazuh RDP Security Alert",
+      "webhookId": "1fa571bd-4a76-4282-8456-05fbf212c7cb"
+    },
+    {
+      "parameters": {
+        "content": "## Wazuh Alerts\n",
+        "height": 240,
+        "width": 816,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1840,
+        208
+      ],
+      "typeVersion": 1,
+      "id": "ba6abf60-a7b0-4da7-8928-30b78210c63e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Host Deisolation \n",
+        "height": 384,
+        "width": 816,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1840,
+        464
+      ],
+      "typeVersion": 1,
+      "id": "8625a328-683d-4e83-95ce-a37a630cf683",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Scheduled Reports ",
+        "height": 240,
+        "width": 816,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1840,
+        864
+      ],
+      "typeVersion": 1,
+      "id": "9b28e09a-47fa-46d1-941d-231c72acb1b4",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "chatId": "0",
+        "text": "=🛡️ <b>Threat Intelligence Report</b>\n📅 {{ $now.format('y-MM-DD HH:mm') }} UTC\n\n━━━━━━━━━━━━━━━━━━\n<b>📊 Overview</b>\n• <b>Unique Attacker IPs:</b> {{ $json.totalIPs }}\n• <b>Total Login Attempts:</b> {{ $json.totalAttempts }}\n• <b>Total Alerts Triggered:</b> {{ $json.totalAlerts }}\n• <b>High-Risk Sources:</b> {{ $json.highRiskIPs }} (AbuseScore >50 or TOR)\n\n━━━━━━━━━━━━━━━━━━\n<b>🔥 Top 5 Attackers</b>\n{{ $json.topAttackers.map((attacker, i) => `${i+1}. <code>${attacker.ip}</code> (${attacker.country})\n   └ ${attacker.attempts} attempts | ${attacker.isp}\n   └ Abuse Score: ${attacker.abuseScore}`).join('\\n\\n') }}\n\n━━━━━━━━━━━━━━━━━━\n<b>🌍 Top Source Countries</b>\n{{ $json.topCountries.map((c, i) => `${i+1}. ${c[0]} - ${c[1]} IPs`).join('\\n') }}\n\n━━━━━━━━━━━━━━━━━━\n<i>Next report in 4 hours</i>\n",
+        "additionalFields": {
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1136,
+        928
+      ],
+      "id": "d5d287a8-effc-4cda-9901-bff09c5078c8",
+      "name": "Report",
+      "webhookId": "01a2e624-a4f1-4a41-8642-7a27148eb231",
+      "credentials": {
+        "telegramApi": {
+          "id": "3psP5oEc01meZIOO",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.abuseipdb.com/api/v2/check",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "ipAddress",
+              "value": "={{ $('Extract Fields').item.json.attackerIP }}"
+            },
+            {
+              "name": "maxAgeInDays",
+              "value": "90"
+            },
+            {
+              "name": "verbose",
+              "value": "true "
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1344,
+        288
+      ],
+      "id": "e7bd78cb-4abe-4891-9823-84b058b6a9bf",
+      "name": "AbuseIPDB Lookup",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "7lrw6ErqXzeDfhJF",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "incident",
+        "operation": "create",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.serviceNow",
+      "typeVersion": 1,
+      "position": [
+        0,
+        768
+      ],
+      "id": "11133936-0c90-4792-8622-1ef1d4b283b9",
+      "name": "Alert ServiceNow",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "0",
+          "mode": "id"
+        },
+        "text": "=🚨 *SECURITY ALERT - Host Isolated*  A successful login from a *non-whitelisted IP* has been detected. The host has been automatically isolated.  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  *⚠️ Alert Details:* • *Timestamp:* {{ $('Extract Fields').first().json.timestamp }} • *Agent:* {{ $('Extract Fields').first().json.agentName }} • *Agent IP:* {{ $('Extract Fields').first().json.agentIP }} • *Suspicious IP:* {{ $('Extract Fields').first().json.attackerIP }} • *Username Used:* {{ $('Extract Fields').first().json.targetUsername }} • *Logon Type:* {{ $('Extract Fields').first().json.logonType }} • *Rule Triggered:* {{ $('Extract Fields').first().json.ruleName }}  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  *🛡️ Action Taken:* Host {{ $('Extract Fields').first().json.agentName }} has been isolated. Connection to Wazuh manager remains active.  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ⚡ *IMMEDIATE ACTION REQUIRED*",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        576
+      ],
+      "id": "06992c0a-8123-4834-886b-6e3fb5dead5c",
+      "name": "Alert Slack",
+      "webhookId": "01eb9ff5-a169-49ac-bd00-61fc35dc0614",
+      "credentials": {
+        "slackApi": {
+          "id": "svmHGguG6rsBMmC5",
+          "name": "Wazuh HoneyBot Chatbot Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "0",
+        "text": "=🚨 <b>SECURITY ALERT - Host Isolated</b>\n\nA successful login from a <b>non-whitelisted IP</b> has been detected. The host has been automatically isolated.\n\n<b>⚠️ Alert Details:</b>\n• <b>Timestamp:</b> {{ $('Extract Fields').first().json.timestamp }}\n• <b>Agent:</b> {{ $('Extract Fields').first().json.agentName }}\n• <b>Agent IP:</b> {{ $('Extract Fields').first().json.agentIP }}\n• <b>Suspicious IP:</b> {{ $('Extract Fields').first().json.attackerIP }}\n• <b>Username Used:</b> {{ $('Extract Fields').first().json.targetUsername }}\n• <b>Logon Type:</b> {{ $('Extract Fields').first().json.logonType }}\n• <b>Rule Triggered:</b> {{ $('Extract Fields').first().json.ruleName }}\n\n\n<b>🛡️ Action Taken:</b>\nHost {{ $('Extract Fields').first().json.agentName }} has been isolated. Connection to Wazuh manager remains active.\n\n⚡ <b>IMMEDIATE ACTION REQUIRED</b>\n",
+        "additionalFields": {
+          "appendAttribution": true,
+          "disable_web_page_preview": true,
+          "parse_mode": "HTML"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        384
+      ],
+      "id": "4484e06b-0c57-4246-94a0-5b99acd3f43c",
+      "name": "Alert Telegram",
+      "webhookId": "01a2e624-a4f1-4a41-8642-7a27148eb231",
+      "credentials": {
+        "telegramApi": {
+          "id": "3psP5oEc01meZIOO",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f242be12-9be2-4868-9a05-1703a8acc8f8",
+              "leftValue": "={{ Object.keys($('Get Row from Whitelist').first().json).length}}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -672,
+        480
+      ],
+      "id": "2f5fde57-ecea-4e68-8c68-91fb1bc3fb22",
+      "name": "Exists?"
+    },
+    {
+      "parameters": {
+        "errorMessage": "=IP {{ $json.IP }} for the User {{ $json.Username }} is whitelisted - skipping alert"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        384
+      ],
+      "id": "0bf1b443-8d3d-466b-ba84-5708bb6cb44e",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "17IVjsvweNcBWZ-Ps8cpNBV7Zt2wDuw_1l3uyDxmPNXQ",
+          "mode": "list",
+          "cachedResultName": "IP_Whitelist",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/17IVjsvweNcBWZ-Ps8cpNBV7Zt2wDuw_1l3uyDxmPNXQ/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/17IVjsvweNcBWZ-Ps8cpNBV7Zt2wDuw_1l3uyDxmPNXQ/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "IP",
+              "lookupValue": "={{ $('Extract Fields').item.json.attackerIP }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -896,
+        480
+      ],
+      "id": "80d7af52-6a74-4753-8af3-891bcdc7619d",
+      "name": "Get Row from Whitelist",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleApi": {
+          "id": "B4uGw8jaHLInkh3L",
+          "name": "Google Sheets service account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://_YOUR_IP_:55000/security/user/authenticate?raw=true",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -448,
+        576
+      ],
+      "id": "235e94d0-2863-46dd-aaca-d1a305ba5f9e",
+      "name": "Get Wazuh Token",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "bollOwPkDqtobGEm",
+          "name": "Wazuh credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://YOUR_WAZUH_SERVER_IP:55000/active-response?agents_list={{ $('Extract Fields').first().json.agentID }}\n",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.data }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"command\": \"!isolation.exe\",\n  \"arguments\": [\"_YOUR_IP_\"],\n  \"alert\": { \n    \"data\": { \n      \"action\": \"isolate\",\n      \"user\": \"n8n-wazuh\",\n      \"debug\": false\n    }\n  }\n}",
+        "options": {
+          "allowUnauthorizedCerts": true
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -224,
+        576
+      ],
+      "id": "b266b1f8-8a48-4bd0-b70f-21fe75d10114",
+      "name": "Isolate Host"
+    },
+    {
+      "parameters": {
+        "content": "## Successful RDP Logins",
+        "height": 576,
+        "width": 1136,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -944,
+        368
+      ],
+      "typeVersion": 1,
+      "id": "bf709c2e-157a-4a16-8896-682b8eed1b2f",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Failed RDP Logins",
+        "height": 368,
+        "width": 1136,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -944,
+        -16
+      ],
+      "typeVersion": 1,
+      "id": "d4d49462-0d36-48e9-8a81-93c95633957e",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "# 🚨 Honeybot SOC Automation Project \n### [Full Walkthrough guide on GitHub](https://github.com/A-AlaminH/wazuh-n8n-honeybot)\n\n## PROJECT SUMMARY\nThis project integrates Wazuh (SIEM) with n8n (workflow automation) to create a fully automated security response system. It detects suspicious Windows login events, enriches them with AbuseIPDB threat intel, and executes network isolation using C-LiveResponse, while sending alerts via Telegram, Slack, and ServiceNow.\n\n## HOW IT WORKS\n**Flow 1: Wazuh Alerts Enrichment**\n• Gets alert via a web hook then enriches them through AbuseIPDB API. then:\n  - **60204** (failed logins): checks for pre-exissting Ips in sheet lookup → Merges alert data fields → Update/Append to Threat Data sheet\n  - **92653** (Successful RDP Logins): Whitelist check → If not whitelisted: JWT auth → Isolate → Alert Telegram/Slack/ServiceNow\n\n**Flow 2: De-isolation**\n• Telegram /release command (chat ID verified) → JWT → Release agent → Notify\n\n**Flow 3: Scheduled Reports**\n• Cron (4h) → Fetch Threat Data → Format summary → Send to chatops\n\n## HOW TO USE\n1. Import workflow JSON, remap credentials and Sheet IDs\n2. Configure nodes: AbuseIPDB key, Threat Data & Whitelist Sheet IDs, Telegram bot token/chat ID, Wazuh IP\n3. Edit Wazuh ossec.conf: Add webhook http://N8N_IP:5678/webhook/wazuh-alerts and isolation command\n4. Place isolation.exe at C:\\Program Files\\ossec-agent\\active-response\\bin\\\n\n## REQUIREMENTS\nInfrastructure: Wazuh 4.13.1 OVA, Win Server 2022, n8n\nServices: Telegram bot, Google Cloud (Sheets API + Service Account), AbuseIPDB API key\nOptional: Slack, ServiceNow\nIsolation module: [C-LiveResponse](https://github.com/mitzep0x1/C-LiveResponse)\n\n## HOW TO CUSTOMIZE\n- Change detection rules: Edit ossec.conf rule_id, update Switch node\n- Adjust report schedule: Edit cron in Scheduled Report node\n- Add alert channels: Duplicate Telegram/Slack nodes\n- Custom threat logic: Edit JavaScript merge node\n\n## STUCK? NEED HELP?\n[Full README](https://github.com/A-AlaminH/wazuh-n8n-honeybot)\n\nDocs: [Wazuh](https://documentation.wazuh.com/current/) | [n8n](https://docs.n8n.io/) | [AbuseIPDB](https://docs.abuseipdb.com/)\n\n### Common Issues\n\nWebhook not firing? Check firewall port 5678 | Sheets errors? Service account needs Editor access | Import errors? Remap credentials in each node\n\n\n",
+        "height": 1344,
+        "width": 544
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2400,
+        -112
+      ],
+      "typeVersion": 1,
+      "id": "d90bd235-0aff-4209-9259-cb3565376b76",
+      "name": "Sticky Note5"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Extract Fields": {
+      "main": [
+        [
+          {
+            "node": "AbuseIPDB Lookup",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Sheet Lookup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Row from Whitelist",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sheet Lookup": {
+      "main": [
+        [
+          {
+            "node": "Set Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Wazuh Token1": {
+      "main": [
+        [
+          {
+            "node": "De-Isolate Host",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Existing Data": {
+      "main": [
+        [
+          {
+            "node": "New?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Attacks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manually De-Isolate": {
+      "main": [
+        [
+          {
+            "node": "Get Wazuh Token1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bot De-Isolate Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Wazuh Token1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New?": {
+      "main": [
+        [
+          {
+            "node": "Update Row",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append Row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Attacks": {
+      "main": [
+        [
+          {
+            "node": "Report Format Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Report Format Code": {
+      "main": [
+        [
+          {
+            "node": "Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Fields": {
+      "main": [
+        [
+          {
+            "node": "Merge Existing Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wazuh RDP Security Alert": {
+      "main": [
+        [
+          {
+            "node": "Extract Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AbuseIPDB Lookup": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exists?": {
+      "main": [
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Wazuh Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Row from Whitelist": {
+      "main": [
+        [
+          {
+            "node": "Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Wazuh Token": {
+      "main": [
+        [
+          {
+            "node": "Isolate Host",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Isolate Host": {
+      "main": [
+        [
+          {
+            "node": "Alert Telegram",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Alert Slack",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Alert ServiceNow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3cc6c0c4-f2b2-4110-bdb6-910fbbbee398",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "46372d2b4c586d18b9694b41ac14d262f3609995fc42e975fcfe034beee3c0e7"
+  },
+  "id": "7Il16tnLwtHipezi",
+  "tags": []
+}
